@@ -30,7 +30,7 @@ class Client(object):
         self.messages = Messages(self)
         self.tags = Tags(self)
 
-    def _get(self, endpoint, **kwargs):
+    def _get(self, endpoint, **kwargs):        
         return self._request('GET', endpoint, **kwargs)
 
     def _post(self, endpoint, **kwargs):
@@ -47,10 +47,13 @@ class Client(object):
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'Api-Token': self.api_key
-        }
+        }                
         if headers:
-            _headers.update(headers)
-
+            _headers.update(headers)        
+        # In case of debug
+        #import pprint
+        #from pprint import pformat
+        #print(method, self.BASE_URL + endpoint, _headers, pformat(kwargs))
         return self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
 
     def _parse(self, response):

@@ -233,8 +233,23 @@ class Contacts(object):
         """
         return self.client._post("/fieldOption/bulk", json=data)
 
-    def create_a_custom_field_value(self):
-        raise NotImplementedError
+    def create_a_custom_field_value(self, data):
+        """
+        https://developers.activecampaign.com/reference#fieldvalues
+        Args:
+            data:
+            {
+                "fieldValue": {
+                    "contact": 2,
+                    "field": 3,
+                    "value": "Blue"
+                },
+                "useDefaults": true
+            }
+        """
+        return self.client._post("/fieldValues", json=data)
+        
+        #raise NotImplementedError
 
     def retrieve_a_custom_field_value(self):
         raise NotImplementedError
