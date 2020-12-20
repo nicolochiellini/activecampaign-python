@@ -248,8 +248,6 @@ class Contacts(object):
             }
         """
         return self.client._post("/fieldValues", json=data)
-        
-        #raise NotImplementedError
 
     def retrieve_a_custom_field_value(self):
         raise NotImplementedError
