@@ -249,17 +249,32 @@ class Contacts(object):
         """
         return self.client._post("/fieldValues", json=data)
 
-    def retrieve_a_custom_field_value(self):
-        raise NotImplementedError
-
-    def update_a_custom_field_value_for_contact(self):
-        raise NotImplementedError
+    def retrieve_a_custom_field_value(self, custom_field_id):
+        return self.client._get("/fieldValues/{}".format(custom_field_id))    
+        #raise NotImplementedError
+    
+    # SAME OF CREATION
+    def update_a_custom_field_value_for_contact(self):        
+        """
+        https://developers.activecampaign.com/reference#fieldvalues
+        Args:
+            data:
+            {
+                "fieldValue": {
+                    "contact": 2,
+                    "field": 3,
+                    "value": "Blue"
+                },
+                "useDefaults": true
+            }
+        """
+        return self.client._post("/fieldValues", json=data)
 
     def delete_a_custom_field_value(self):
         raise NotImplementedError
 
-    def list_all_custom_field_values(self):
-        raise NotImplementedError
+    def list_all_custom_field_values(self, **params):
+        return self.client._get("/fieldValues", params=params)
 
     def add_a_tag_to_contact(self, data):
         """

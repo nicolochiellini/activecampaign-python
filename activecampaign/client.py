@@ -15,10 +15,10 @@ from .tags import Tags
 class Client(object):
     BASE_URL = '{}/api/3'
 
-    def __init__(self, url, api_key):
+    def __init__(self, url, api_key, timeout=10):
         self.BASE_URL = self.BASE_URL.format(url)
         self.api_key = api_key
-
+        self.timeout = timeout
         self.automations = Automations(self)
         self.contacts = Contacts(self)
         self.deals = Deals(self)
@@ -54,7 +54,7 @@ class Client(object):
         #import pprint
         #from pprint import pformat
         #print(method, self.BASE_URL + endpoint, _headers, pformat(kwargs))
-        return self._parse(requests.request(method, self.BASE_URL + endpoint, headers=_headers, **kwargs))
+        return self._parse(requests.request(method, self.BASE_URL + endpoint, timeout=self.timeout, headers=_headers, **kwargs))
 
     def _parse(self, response):
         if 'application/json' in response.headers['Content-Type']:
